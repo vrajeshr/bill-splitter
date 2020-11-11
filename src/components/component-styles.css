@@ -8,8 +8,15 @@
 
 .App-content {
   flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .App-footer {
   font-size: 10px;
+}
+
+.partyConfigurator {
+  background-color: white;
 }
