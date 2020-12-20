@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import "./styles.css";
 
 const EnterNames = (props) => {
@@ -11,7 +11,9 @@ const EnterNames = (props) => {
         setNames(currnames);
     };
 
-    return (
+    return props.partySize === 0 ? (
+        <Redirect to="/" />
+    ) : (
         <div className="enter-names">
             <p>Enter party member names :</p>
             {[...Array(props.partySize)].map((el, indx) => {
