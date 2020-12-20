@@ -1,14 +1,15 @@
 import "./styles.css";
 import { useRef, useState } from "react";
+import { NavLink, Redirect } from "react-router-dom";
 
-const EnterFood = () => {
+const EnterFood = (props) => {
     const [foodList, setFoodList] = useState(["", "", ""]);
 
     const inputRef = useRef();
 
     const handleOnChange = (e, indx) => {
         let currFoods = [...foodList];
-        foodList[indx] = e.target.value;
+        currFoods[indx] = e.target.value;
         setFoodList(currFoods);
     };
 
@@ -16,10 +17,11 @@ const EnterFood = () => {
         let currFoods = [...foodList, ""];
         inputRef.current.focus();
         setFoodList(currFoods);
-        console.log(inputRef);
     };
 
-    return (
+    return props.partySize === 0 ? (
+        <Redirect to="/" />
+    ) : (
         <div className="enter-food">
             <p>Enter the food you ate : </p>
             {foodList.map((element, indx) => {
@@ -34,6 +36,14 @@ const EnterFood = () => {
                 );
             })}
             <input className="more-rows" onFocus={onAddNewRow} type="text" placeholder="+" />
+            <NavLink
+                onClick={() => {
+                    props.submit(foodList);
+                }}
+                to="/food"
+            >
+                Next
+            </NavLink>
         </div>
     );
 };

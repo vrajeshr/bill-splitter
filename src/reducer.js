@@ -1,7 +1,7 @@
 import * as actionTypes from "./actions";
 
 const initialState = {
-    partySize: -1,
+    partySize: 0,
 };
 
 const reducer = (state = initialState, action) => {
@@ -16,6 +16,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 names: action.payload.names,
+            };
+        case actionTypes.FOOD_RECIEVED:
+            return {
+                ...state,
+                foodlist: action.payload.foodlist,
             };
     }
     return state;

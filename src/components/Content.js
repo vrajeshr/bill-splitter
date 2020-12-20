@@ -11,6 +11,7 @@ import EnterNames from "./EnterNames/EnterNames";
 import EnterFood from "./EnterFood/EnterFood";
 
 const Content = (props) => {
+    console.log(props);
     return (
         <div className="App-content">
             {
@@ -25,7 +26,10 @@ const Content = (props) => {
                         />
                     </Route>
                     <Route exact path="/food">
-                        <EnterFood />
+                        <EnterFood
+                            submit={(foods) => props.onFoodReceived(foods)}
+                            partySize={props.data.partySize}
+                        />
                     </Route>
                 </Switch>
             }
@@ -45,6 +49,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({ type: actionTypes.PARTY_SIZE_RECIEVED, payload: { partySize: num } }),
         onNamesReceived: (names) =>
             dispatch({ type: actionTypes.NAMES_RECIEVED, payload: { names: names } }),
+        onFoodReceived: (foodlist) =>
+            dispatch({ type: actionTypes.FOOD_RECIEVED, payload: { foodlist: foodlist } }),
     };
 };
 
